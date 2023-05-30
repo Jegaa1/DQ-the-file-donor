@@ -5,7 +5,7 @@ from info import ADMINS, LOG_CHANNEL, SUPPORT_CHAT, MELCOW_NEW_USERS, MELCOW_VID
 from database.users_chats_db import db
 from database.ia_filterdb import Media
 from utils import get_size, temp, get_settings
-from Script import script
+from script import script
 from pyrogram.errors import ChatAdminRequired
 import asyncio 
 
