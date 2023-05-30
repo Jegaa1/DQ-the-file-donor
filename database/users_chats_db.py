@@ -1,15 +1,12 @@
-# https://github.com/odysseusmax/animated-lamp/blob/master/bot/database/database.py
 import motor.motor_asyncio
-from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, AUTO_DELETE, MAX_BTN, AUTO_FFILTER, SHORTLINK_API, SHORTLINK_URL, IS_SHORTLINK
+from info import DATABASE_NAME, DATABASE_URL, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, AUTO_DELETE, MAX_BTN, AUTO_FFILTER, SHORTLINK_API, SHORTLINK_URL, IS_SHORTLINK
 
 class Database:
-    
     def __init__(self, uri, database_name):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
         self.db = self._client[database_name]
         self.col = self.db.users
         self.grp = self.db.groups
-
 
     def new_user(self, id, name):
         return dict(
@@ -98,8 +95,6 @@ class Database:
         b_chats = [chat['id'] async for chat in chats]
         b_users = [user['id'] async for user in users]
         return b_users, b_chats
-    
-
 
     async def add_chat(self, chat, title):
         chat = self.new_group(chat, title)
@@ -110,7 +105,6 @@ class Database:
         chat = await self.grp.find_one({'id':int(chat)})
         return False if not chat else chat.get('chat_status')
     
-
     async def re_enable_chat(self, id):
         chat_status=dict(
             is_disabled=False,
@@ -121,7 +115,6 @@ class Database:
     async def update_settings(self, id, settings):
         await self.grp.update_one({'id': int(id)}, {'$set': {'settings': settings}})
         
-    
     async def get_settings(self, id):
         default = {
             'button': SINGLE_BUTTON,
@@ -164,4 +157,4 @@ class Database:
     async def get_db_size(self):
         return (await self.db.command("dbstats"))['dataSize']
 
-db = Database(DATABASE_URI, DATABASE_NAME)
+db = Database(DATABASE_URL, DATABASE_NAME)
