@@ -18,7 +18,7 @@ AUTH_CHANNEL = None
 
 # MongoDB information
 DATABASE_URL = "mongodb://[username:password@]host1[:port1][,...hostN[:portN]][/[defaultauthdb]?retryWrites=true&w=majority"
-DATABASE_NAME = 'Telegram'
-COLLECTION_NAME = 'channel_files'  # If you are using the same database, then use different collection name for each bot
+DATABASE_NAME = 'Filterbot'
+COLLECTION_NAME = 'Telegramfiles'  # If you are using the same database, then use different collection name for each bot
 
 
