@@ -50,7 +50,7 @@ class Bot(Client):
         today = date.today()
         now = datetime.now(tz)
         time = now.strftime("%H:%M:%S %p")
-        await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
+        try: await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
         except Exception as e: logger.warning(f"Bot Isn't Able To Send Message To LOG_CHANNEL \n{e}")
         if WEBHOOK is True:
             app = web.AppRunner(await web_server())
